@@ -2,84 +2,87 @@
 
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
+import { Button } from './ui/button';
 
 export default function Navbar() {
   const { data: session, status } = useSession();
   const isLoading = status === 'loading';
 
   return (
-    <nav className="bg-white shadow-sm border-b">
+    <nav className="border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:backdrop-blur">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          {/* Logo / Brand */}
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900">
-              LandJobPlatform
-            </Link>
+        <div className="flex items-center justify-between py-4 gap-6">
+          <div className="flex items-center gap-2">
+            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-semibold">
+              LJ
+            </div>
+            <div className="flex flex-col leading-tight">
+              <Link href="/" className="text-xl font-semibold text-foreground">
+                LandJobPlatform
+              </Link>
+              <span className="text-sm text-muted-foreground">Des talents RH à portée de clic</span>
+            </div>
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex items-center space-x-8">
+          <div className="flex items-center gap-6 text-sm sm:text-base">
             <Link
               href="/rh"
-              className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+              className="text-foreground/80 transition-colors hover:text-foreground"
             >
               Trouver un RH
             </Link>
 
             {isLoading ? (
-              <div className="text-gray-400">Chargement...</div>
+              <div className="text-muted-foreground">Chargement...</div>
             ) : session ? (
-              <>
+              <div className="flex items-center gap-4">
                 <Link
                   href="/rh/create"
-                  className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                  className="text-foreground/80 transition-colors hover:text-foreground"
                 >
                   Devenir RH
                 </Link>
 
                 <Link
                   href="/dashboard"
-                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                  className="text-foreground/80 transition-colors hover:text-foreground"
                 >
                   Dashboard
                 </Link>
 
                 <Link
                   href="/admin"
-                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                  className="text-foreground/80 transition-colors hover:text-foreground"
                 >
                   Admin
                 </Link>
 
-                <div className="flex items-center space-x-4">
-                  <span className="text-sm text-gray-600">
+                <div className="flex items-center gap-3 pl-3 border-l border-border/70">
+                  <span className="text-sm text-muted-foreground">
                     {session.user?.name || session.user?.email}
                   </span>
-                  <button
+                  <Button
+                    variant="destructive"
+                    size="sm"
                     onClick={() => signOut({ callbackUrl: '/' })}
-                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors font-medium"
                   >
                     Déconnexion
-                  </button>
+                  </Button>
                 </div>
-              </>
+              </div>
             ) : (
-              <>
+              <div className="flex items-center gap-3">
                 <Link
                   href="/auth/login"
-                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                  className="text-foreground/80 transition-colors hover:text-foreground"
                 >
                   Connexion
                 </Link>
 
-                <Link
-                  href="/auth/join"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium"
-                >
-                  Inscription
-                </Link>
-              </>
+                <Button asChild size="sm">
+                  <Link href="/auth/join">Inscription</Link>
+                </Button>
+              </div>
             )}
           </div>
         </div>
