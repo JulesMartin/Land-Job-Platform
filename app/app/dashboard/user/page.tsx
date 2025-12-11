@@ -87,13 +87,59 @@ export default function UserDashboardPage() {
       setIsLoading(true);
       const response = await fetch('/api/dashboard/user/consultations');
 
-      if (!response.ok) {
+      if (response.ok) {
         const data = await response.json();
-        throw new Error(data.error || 'Erreur lors de la récupération des données');
+        setDashboardData(data);
+        return;
       }
 
-      const data = await response.json();
-      setDashboardData(data);
+      const errorText = await response.text();
+      console.error(
+        '[Dashboard] API error /api/dashboard/user/consultations',
+        response.status,
+        errorText
+      );
+
+      if (response.status === 404) {
+        console.warn(
+          '[Dashboard] Fallback: aggregating data from /api/consultations and /api/favorites'
+        );
+
+        const [consultationsRes, favoritesRes] = await Promise.all([
+          fetch('/api/consultations'),
+          fetch('/api/favorites'),
+        ]);
+
+        if (!consultationsRes.ok || !favoritesRes.ok) {
+          const consultationsError = await consultationsRes.text();
+          const favoritesError = await favoritesRes.text();
+          throw new Error(
+            `Erreur lors du fallback: consultations(${consultationsRes.status}) ${consultationsError}; favorites(${favoritesRes.status}) ${favoritesError}`
+          );
+        }
+
+        const [consultationsData, favoritesData] = await Promise.all([
+          consultationsRes.json(),
+          favoritesRes.json(),
+        ]);
+
+        const consultations = consultationsData.data || [];
+        const favorites = favoritesData.data || [];
+
+        setDashboardData({
+          consultations,
+          favorites,
+          stats: {
+            totalConsultations: consultations.length,
+            totalFavorites: favorites.length,
+          },
+        });
+        return;
+      }
+
+      throw new Error(
+        `Erreur lors de la récupération des données (${response.status}): ${errorText}`
+      );
     } catch (err: any) {
       console.error('Erreur:', err);
       toast.error(err.message);
