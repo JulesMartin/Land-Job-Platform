@@ -17,7 +17,14 @@ export async function GET(req: NextRequest) {
     const where: any = {};
 
     // Filtre par statut actif (par défaut, seulement les profils actifs)
-    where.isActive = isActiveParam === 'false' ? false : true;
+    if (isActiveParam === 'false') {
+      where.isActive = false;
+    } else if (isActiveParam === 'all') {
+      // Pas de filtre d'état pour permettre l'affichage de tous les profils (admin)
+    } else {
+      // Par défaut ou si isActive=true, on retourne uniquement les profils actifs
+      where.isActive = true;
+    }
 
     // Filtre par expertise
     if (expertiseParam) {
