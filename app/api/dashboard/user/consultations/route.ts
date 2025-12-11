@@ -19,6 +19,7 @@ export async function GET(req: NextRequest) {
         { status: 401 }
       );
     }
+     console.log('[Dashboard User] Fetching data for:', session.user.email);
 
     // Récupérer l'utilisateur avec ses consultations et favoris
     const user = await prisma.user.findUnique({
