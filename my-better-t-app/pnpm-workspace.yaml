@@ -1,0 +1,5 @@
+packages:
+  - apps/*
+  - packages/*
+catalog:
+  "@prisma/client": ^7.0.1
