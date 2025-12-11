@@ -45,6 +45,13 @@ export default function Navbar() {
                   Dashboard
                 </Link>
 
+                <Link
+                  href="/admin"
+                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                >
+                  Admin
+                </Link>
+
                 <div className="flex items-center space-x-4">
                   <span className="text-sm text-gray-600">
                     {session.user?.name || session.user?.email}
