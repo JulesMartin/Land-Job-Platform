@@ -1,235 +1,462 @@
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client";
+
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
-const benefits = [
-  {
-    title: "Talents vérifiés",
-    description:
-      "Tous les experts RH sont sélectionnés et validés pour garantir un accompagnement fiable.",
-    icon: <ShieldCheck className="h-6 w-6 text-primary" />, 
-  },
-  {
-    title: "Accompagnement rapide",
-    description:
-      "Planifiez un premier échange en quelques clics et accélérez vos recrutements.",
-    icon: <Sparkles className="h-6 w-6 text-primary" />, 
-  },
-  {
-    title: "Expérience sur-mesure",
-    description:
-      "Des profils adaptés à vos enjeux : recrutement, marque employeur, onboarding et plus encore.",
-    icon: <Users className="h-6 w-6 text-primary" />, 
-  },
-];
-
-const steps = [
-  {
-    title: "Expliquez vos besoins",
-    description: "Indiquez votre secteur, vos enjeux et le périmètre de la mission RH.",
-  },
-  {
-    title: "Nous sélectionnons les meilleurs profils",
-    description: "Accédez à une shortlist d'experts validés et disponibles immédiatement.",
-  },
-  {
-    title: "Démarrez votre collaboration",
-    description: "Programmez un rendez-vous et lancez votre mission avec un suivi transparent.",
-  },
-];
+  ArrowUpRight,
+  Briefcase,
+  UserCheck,
+  Search,
+  FileText,
+  Target,
+  Users,
+} from "lucide-react";
+import { SplitToggleSection } from "@/components/ui/split-toggle-section";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
   return (
-    <div className="space-y-16">
-      <section className="relative overflow-hidden rounded-3xl border bg-gradient-to-br from-primary/5 via-background to-background p-10 shadow-sm">
-        <div className="absolute inset-y-0 right-[-12%] hidden h-full w-1/3 rounded-full bg-primary/10 blur-3xl lg:block" />
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center relative">
-          <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-              <Sparkles className="h-4 w-4" />
-              Plateforme dédiée aux talents RH
-            </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-foreground">
-              Accédez aux meilleurs experts RH pour vos recrutements et vos équipes
-            </h1>
-            <p className="max-w-2xl text-lg text-muted-foreground">
-              LandJobPlatform connecte les entreprises avec des professionnels RH qualifiés : recruteurs, coachs emploi et spécialistes de la marque employeur.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button size="lg" className="gap-2">
-                Trouver un RH
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="gap-2">
-                Devenir RH partenaire
-              </Button>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {["+300 profils vérifiés", "24h pour une mise en relation", "Satisfaction garantie"].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-2 rounded-lg border border-dashed px-4 py-3 text-sm text-muted-foreground"
-                >
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>{item}</span>
+    <main className="bg-gray-50 flex-1 pt-24">
+      {/* Hero Section */}
+      <div className="bg-[#0d4d4d] flex items-center justify-center p-6 lg:p-20">
+        <div className="w-full max-w-[100rem]">
+          {/* Hero Card */}
+          <div className="grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
+            {/* Left Section - Content */}
+            <div className="relative p-12 lg:p-16 flex flex-col overflow-hidden">
+              {/* Background - Two colors */}
+              <div className="absolute inset-0">
+                <div className="p-50 bg-[#c9d5c0]"></div>
+                <div className="p-100 bg-[#0a3d3d]"></div>
+              </div>
+
+              {/* Content overlay */}
+              <div className="relative z-10 flex-1">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full mb-8">
+                  <span className="text-xl">🇫🇷</span>
+                  <span className="text-[#0d4d4d] font-medium text-sm">
+                    Plateforme RH Française
+                  </span>
                 </div>
-              ))}
+
+                {/* Main Heading */}
+                <h1 className="text-[#0d4d4d] mb-2">
+                  <div className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+                    Meilleurs RH.
+                  </div>
+                  <div className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+                    Meilleures équipes.
+                  </div>
+                </h1>
+              </div>
+
+              {/* Bottom Section with Description - Overlays the background */}
+              <div className="relative z-10 mt-12">
+                <p className="text-white text-lg lg:text-xl leading-relaxed mb-6 mt-16">
+                  Nous connectons les <span className="font-bold">chercheurs d'emploi</span> avec
+                  les meilleures opportunités et aidons les{" "}
+                  <span className="font-bold">recruteurs</span> à trouver les talents
+                  parfaits pour leurs équipes.
+                </p>
+
+                {/* CTA Button */}
+                <button className="bg-[#ffd700] hover:bg-[#ffed4e] text-black px-8 py-4 rounded-lg font-semibold transition-all hover:shadow-lg text-lg">
+                  Commencer maintenant
+                </button>
+              </div>
+            </div>
+
+            {/* Right Section - Image */}
+            <div className="bg-[#6b7c6e] relative min-h-[500px] lg:min-h-full overflow-hidden">
+              <img
+                src="/images/hero-professional.webp"
+                alt="Professional HR Consultant"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+              />
             </div>
           </div>
-
-          <Card className="backdrop-blur-sm border-border/80">
-            <CardHeader className="border-b border-border/70">
-              <CardTitle className="text-xl">Décrivez votre besoin</CardTitle>
-              <CardDescription>
-                Nous vous mettons en relation avec un expert RH adapté à votre secteur.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 pt-6">
-              <div className="space-y-2">
-                <Label htmlFor="mission">Mission recherchée</Label>
-                <Input id="mission" placeholder="Ex: Recrutement tech senior" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="sector">Secteur</Label>
-                <Input id="sector" placeholder="Ex: SaaS, Banque, Industrie..." />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email professionnel</Label>
-                <Input id="email" type="email" placeholder="vous@entreprise.com" />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full">Recevoir une shortlist</Button>
-            </CardFooter>
-          </Card>
         </div>
-      </section>
+      </div>
 
-      <section className="grid gap-6 md:grid-cols-3">
-        {benefits.map((benefit) => (
-          <Card key={benefit.title} className="h-full">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
-                  {benefit.icon}
-                </div>
-                <CardTitle>{benefit.title}</CardTitle>
-              </div>
-              <CardDescription>{benefit.description}</CardDescription>
-            </CardHeader>
-          </Card>
-        ))}
-      </section>
+      {/* Split Toggle Section */}
+      <section className="py-20 bg-white">
+        <div className="text-center mb-12 px-6 lg:px-12">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#0d4d4d] mb-4">
+            Qui êtes-vous ?
+          </h2>
+          <p className="text-lg text-gray-600">
+            Sélectionnez votre profil pour découvrir nos services personnalisés
+          </p>
+        </div>
 
-      <section className="rounded-3xl border bg-card/60 p-8 shadow-sm">
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-semibold">Comment ça marche ?</h2>
-            <p className="text-muted-foreground max-w-2xl">
-              Notre processus est pensé pour vous faire gagner du temps tout en assurant un accompagnement humain et personnalisé.
-            </p>
+        <SplitToggleSection
+          leftContent={
             <div className="space-y-4">
-              {steps.map((step, index) => (
-                <div key={step.title} className="relative rounded-2xl border px-5 py-4">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
-                      {index + 1}
+              <div className="w-16 h-16 mx-auto bg-[#c9d5c0] rounded-full flex items-center justify-center">
+                <Search className="w-8 h-8 text-[#0d4d4d]" />
+              </div>
+              <h3 className="text-2xl font-bold text-[#0d4d4d]">
+                Je cherche un emploi
+              </h3>
+              <p className="text-gray-600">
+                Trouvez votre prochaine opportunité professionnelle
+              </p>
+            </div>
+          }
+          rightContent={
+            <div className="space-y-4">
+              <div className="w-16 h-16 mx-auto bg-[#ffd700] rounded-full flex items-center justify-center">
+                <Users className="w-8 h-8 text-[#0d4d4d]" />
+              </div>
+              <h3 className="text-2xl font-bold text-[#0d4d4d]">
+                Je suis un recruteur
+              </h3>
+              <p className="text-gray-600">
+                Trouvez les meilleurs talents pour votre entreprise
+              </p>
+            </div>
+          }
+          expandedLeftContent={
+            <div className="space-y-4">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-4xl lg:text-5xl font-bold text-[#0d4d4d]">
+                  Chercheurs d'emploi
+                </h2>
+                <div className="w-16 h-16 bg-[#c9d5c0] rounded-full flex items-center justify-center">
+                  <Search className="w-8 h-8 text-[#0d4d4d]" />
+                </div>
+              </div>
+
+              <p className="text-lg text-gray-700 mb-4">
+                Nous vous accompagnons dans votre recherche d'emploi et votre
+                développement professionnel.
+              </p>
+
+              <div className="grid gap-3">
+                <Card className="border-2 border-[#c9d5c0] hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-[#0d4d4d]">
+                      <Briefcase className="w-5 h-5" />
+                      Recherche d'emploi personnalisée
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Accédez à des opportunités exclusives dans votre domaine.
+                      Nous vous mettons en relation avec des employeurs qui
+                      correspondent à votre profil.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-[#c9d5c0] hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-[#0d4d4d]">
+                      <FileText className="w-5 h-5" />
+                      Préparation de CV et entretiens
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Optimisez votre CV et préparez-vous efficacement pour
+                      vos entretiens d'embauche avec nos experts RH.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-[#c9d5c0] hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-[#0d4d4d]">
+                      <Target className="w-5 h-5" />
+                      Coaching carrière
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Bénéficiez d'un accompagnement personnalisé pour
+                      atteindre vos objectifs professionnels.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="flex gap-4 mt-4 pt-4 border-t border-gray-200">
+                <Button className="bg-[#0d4d4d] hover:bg-[#0d4d4d]/90 text-white flex-1">
+                  Créer mon profil
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1 border-[#0d4d4d] text-[#0d4d4d] hover:bg-[#c9d5c0]"
+                >
+                  Voir les offres
+                </Button>
+              </div>
+            </div>
+          }
+          expandedRightContent={
+            <div className="space-y-4">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-4xl lg:text-5xl font-bold text-[#0d4d4d]">
+                  Recruteurs
+                </h2>
+                <div className="w-16 h-16 bg-[#ffd700] rounded-full flex items-center justify-center">
+                  <Users className="w-8 h-8 text-[#0d4d4d]" />
+                </div>
+              </div>
+
+              <p className="text-lg text-gray-700 mb-4">
+                Simplifiez votre processus de recrutement et trouvez les talents
+                dont vous avez besoin pour développer votre entreprise.
+              </p>
+
+              <div className="grid gap-3">
+                <Card className="border-2 border-[#ffd700] hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-[#0d4d4d]">
+                      <UserCheck className="w-5 h-5" />
+                      Accès aux meilleurs talents
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Trouvez rapidement les candidats qualifiés grâce à notre
+                      réseau de professionnels RH vérifiés.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-[#ffd700] hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-[#0d4d4d]">
+                      <Target className="w-5 h-5" />
+                      Recrutement ciblé
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Publiez vos offres et accédez à un vivier de talents
+                      qualifiés qui correspondent à vos critères.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 border-[#ffd700] hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3 text-[#0d4d4d]">
+                      <Briefcase className="w-5 h-5" />
+                      Consultation RH
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">
+                      Bénéficiez de conseils d'experts pour optimiser votre
+                      stratégie RH et résoudre vos problématiques.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="flex gap-4 mt-4 pt-4 border-t border-gray-200">
+                <Button className="bg-[#ffd700] hover:bg-[#ffed4e] text-[#0d4d4d] font-semibold flex-1">
+                  Publier une offre
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1 border-[#0d4d4d] text-[#0d4d4d] hover:bg-[#ffd700]/20"
+                >
+                  En savoir plus
+                </Button>
+              </div>
+            </div>
+          }
+          className="min-h-[700px] lg:min-h-[800px]"
+        />
+      </section>
+
+      {/* Features Section with animated cards */}
+      <section className="py-20 px-6 lg:px-12 bg-[#0d4d4d]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+              Une plateforme complète pour
+              <br />
+              vos besoins RH
+            </h2>
+          </div>
+
+          {/* Feature Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {/* Matching Card */}
+            <div className="group relative bg-[#d4e8d4] rounded-3xl overflow-visible hover:shadow-2xl hover:scale-110 hover:z-10 transition-all duration-500">
+              <div className="p-8 h-[600px] flex flex-col">
+                <div className="mb-6 rounded-2xl overflow-hidden bg-white/50">
+                  <div className="w-full h-48 flex items-center justify-center">
+                    <UserCheck className="w-24 h-24 text-emerald-700/30" />
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <p className="text-gray-800 leading-relaxed mb-4">
+                    Algorithme intelligent qui met en relation les talents avec
+                    les opportunités parfaites
+                  </p>
+                </div>
+                <div className="flex items-center justify-between mt-auto">
+                  <h3 className="text-2xl font-bold text-gray-900">Matching</h3>
+                  <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center group-hover:bg-white transition-colors">
+                    <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Verification Card */}
+            <div className="group relative bg-gray-200 rounded-3xl overflow-visible hover:shadow-2xl hover:scale-110 hover:z-10 transition-all duration-500">
+              <div className="p-8 h-[600px] flex flex-col">
+                <div className="flex-1 flex items-center justify-center group-hover:opacity-0 opacity-100 transition-opacity duration-600 group-hover:pointer-events-none">
+                  <h3 className="text-3xl font-bold text-gray-900 writing-mode-vertical transform rotate-180">
+                    Vérification
+                  </h3>
+                </div>
+                <div className="absolute inset-0 p-8 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto">
+                  <div className="mb-6 rounded-2xl overflow-hidden bg-white/50">
+                    <div className="w-full h-48 flex items-center justify-center">
+                      <Target className="w-24 h-24 text-gray-700/30" />
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-lg font-medium">{step.title}</h3>
-                      <p className="text-muted-foreground">{step.description}</p>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-800 leading-relaxed mb-4">
+                      Validation approfondie des profils RH pour garantir la
+                      qualité et l'expertise
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto">
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Vérification
+                    </h3>
+                    <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center group-hover:bg-white transition-colors">
+                      <ArrowUpRight className="w-5 h-5 text-gray-900" />
                     </div>
                   </div>
                 </div>
-              ))}
+                <div className="flex justify-end mt-auto group-hover:opacity-0 opacity-100 transition-opacity duration-500 group-hover:pointer-events-none">
+                  <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center transition-colors">
+                    <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Coaching Card */}
+            <div className="group relative bg-[#ffd700] rounded-3xl overflow-visible hover:shadow-2xl hover:scale-110 hover:z-10 transition-all duration-500">
+              <div className="p-8 h-[600px] flex flex-col">
+                <div className="flex-1 flex items-center justify-center group-hover:opacity-0 opacity-100 transition-opacity duration-600 group-hover:pointer-events-none">
+                  <h3 className="text-3xl font-bold text-gray-900 writing-mode-vertical transform rotate-180">
+                    Coaching
+                  </h3>
+                </div>
+                <div className="absolute inset-0 p-8 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto">
+                  <div className="mb-6 rounded-2xl overflow-hidden bg-white/50">
+                    <div className="w-full h-48 flex items-center justify-center">
+                      <Users className="w-24 h-24 text-yellow-700/30" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-800 leading-relaxed mb-4">
+                      Accompagnement personnalisé pour booster votre carrière
+                      ou vos recrutements
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto">
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Coaching
+                    </h3>
+                    <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center group-hover:bg-white transition-colors">
+                      <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-end mt-auto group-hover:opacity-0 opacity-100 transition-opacity duration-500 group-hover:pointer-events-none">
+                  <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center transition-colors">
+                    <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Suivi Card */}
+            <div className="group relative bg-[#d4c5f9] rounded-3xl overflow-visible hover:shadow-2xl hover:scale-110 hover:z-10 transition-all duration-500">
+              <div className="p-8 h-[600px] flex flex-col">
+                <div className="flex-1 flex items-center justify-center group-hover:opacity-0 opacity-100 transition-opacity duration-600 group-hover:pointer-events-none">
+                  <h3 className="text-3xl font-bold text-gray-900 writing-mode-vertical transform rotate-180">
+                    Suivi
+                  </h3>
+                </div>
+                <div className="absolute inset-0 p-8 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto">
+                  <div className="mb-6 rounded-2xl overflow-hidden bg-white/50">
+                    <div className="w-full h-48 flex items-center justify-center">
+                      <FileText className="w-24 h-24 text-purple-700/30" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-800 leading-relaxed mb-4">
+                      Tableau de bord complet pour suivre vos candidatures et
+                      recrutements en temps réel
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto">
+                    <h3 className="text-2xl font-bold text-gray-900">Suivi</h3>
+                    <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center group-hover:bg-white transition-colors">
+                      <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-end mt-auto group-hover:opacity-0 opacity-100 transition-opacity duration-500 group-hover:pointer-events-none">
+                  <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center transition-colors">
+                    <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Communauté Card */}
+            <div className="group relative bg-white rounded-3xl overflow-visible hover:shadow-2xl hover:scale-110 hover:z-10 transition-all duration-500">
+              <div className="p-8 h-[600px] flex flex-col">
+                <div className="flex-1 flex items-center justify-center group-hover:opacity-0 opacity-100 transition-opacity duration-600 group-hover:pointer-events-none">
+                  <h3 className="text-3xl font-bold text-gray-900 writing-mode-vertical transform rotate-180">
+                    Communauté
+                  </h3>
+                </div>
+                <div className="absolute inset-0 p-8 flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none group-hover:pointer-events-auto">
+                  <div className="mb-6 rounded-2xl overflow-hidden bg-gray-100">
+                    <div className="w-full h-48 flex items-center justify-center">
+                      <Briefcase className="w-24 h-24 text-gray-700/30" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-800 leading-relaxed mb-4">
+                      Rejoignez un réseau de professionnels RH actifs et
+                      échangez sur vos pratiques
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto">
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Communauté
+                    </h3>
+                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+                      <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-end mt-auto group-hover:opacity-0 opacity-100 transition-opacity duration-500 group-hover:pointer-events-none">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center transition-colors">
+                    <ArrowUpRight className="w-5 h-5 text-gray-900" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <ShieldCheck className="h-5 w-5 text-primary" />
-                  Garanties LandJobPlatform
-                </CardTitle>
-                <CardDescription>Un accompagnement humain, des mises en relation rapides.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-muted-foreground">
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                  <span>Vérification systématique des références et expériences.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                  <span>Suivi continu durant la mission pour garantir la réussite.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                  <span>Feedback partagé pour améliorer vos recrutements.</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-primary/10 to-primary/5">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Des profils RH adaptés</CardTitle>
-                <CardDescription>
-                  Coachs emploi, responsables recrutement, spécialistes onboarding : trouvez le bon profil.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-muted-foreground">
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                  <span>Expertise sectorielle : tech, finance, retail, industrie.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                  <span>Mission ponctuelle ou accompagnement long terme.</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                  <span>Disponibilité en présentiel ou à distance selon vos besoins.</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full gap-2">
-                  Découvrir les profils
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </CardFooter>
-            </Card>
-          </div>
         </div>
       </section>
-
-      <section className="rounded-3xl border bg-primary text-primary-foreground p-8 shadow-sm">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-2 max-w-3xl">
-            <h3 className="text-2xl font-semibold">Prêt à rencontrer votre prochain talent RH ?</h3>
-            <p className="text-primary-foreground/90">
-              Décrivez vos besoins et recevez une shortlist personnalisée sous 24 heures.
-            </p>
-          </div>
-          <div className="flex gap-3 flex-wrap">
-            <Button variant="secondary" className="gap-2">
-              Commencer maintenant
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" className="bg-primary text-primary-foreground border-primary-foreground/30 hover:bg-primary/90">
-              Parler à un conseiller
-            </Button>
-          </div>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }
