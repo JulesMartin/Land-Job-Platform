@@ -1,0 +1,205 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =====================
+// ENUMS
+// =====================
+
+enum Role {
+  ADMIN
+  OWNER
+  MEMBER
+}
+
+enum Expertise {
+  RECRUITMENT
+  TALENT_ACQUISITION
+  HR_CONSULTING
+  COACHING
+  TRAINING
+}
+
+// =====================
+// NextAuth Models
+// =====================
+
+model User {
+  id                     String    @id @default(cuid())
+  name                   String?
+  email                  String    @unique
+  emailVerified          DateTime?
+  password               String?
+  image                  String?
+  invalid_login_attempts Int       @default(0)
+  lockedAt               DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  rhProfile     RHProfile?
+  consultations ConsultationLog[]
+  favorites     Favorite[]
+  teamMembers   TeamMember[]
+  invitations   Invitation[]      @relation("InvitedBy")
+
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// =====================
+// Business Models
+// =====================
+
+model RHProfile {
+  id         String      @id @default(cuid())
+  userId     String      @unique
+  bio        String?     @db.Text
+  expertise  Expertise[]
+  priceRange String?
+  calendlyLink String?
+  isActive   Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  // Relations
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  consultations ConsultationLog[]
+  favorites     Favorite[]
+
+  @@index([userId])
+  @@index([isActive])
+}
+
+model ConsultationLog {
+  id          String   @id @default(cuid())
+  userId      String
+  rhProfileId String
+  timestamp   DateTime @default(now())
+
+  // Relations
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rhProfile RHProfile @relation(fields: [rhProfileId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([rhProfileId])
+}
+
+model Favorite {
+  id          String   @id @default(cuid())
+  userId      String
+  rhProfileId String
+  createdAt   DateTime @default(now())
+
+  // Relations
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rhProfile RHProfile @relation(fields: [rhProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, rhProfileId])
+  @@index([userId])
+  @@index([rhProfileId])
+}
+
+// =====================
+// Multi-tenant (optionnel)
+// =====================
+
+model Team {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  domain      String?
+  defaultRole Role     @default(MEMBER)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  members     TeamMember[]
+  invitations Invitation[]
+
+  @@index([slug])
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  teamId    String
+  userId    String
+  role      Role     @default(MEMBER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+  @@index([teamId])
+  @@index([userId])
+}
+
+model Invitation {
+  id        String   @id @default(cuid())
+  teamId    String
+  email     String
+  token     String   @unique
+  expires   DateTime
+  invitedBy String
+  createdAt DateTime @default(now())
+
+  // Relations
+  team      Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  inviter   User @relation("InvitedBy", fields: [invitedBy], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, email])
+  @@index([teamId])
+  @@index([email])
+  @@index([token])
+}
