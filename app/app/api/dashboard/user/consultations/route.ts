@@ -10,6 +10,7 @@ import prisma from '@/lib/prisma';
  */
 export async function GET(req: NextRequest) {
   try {
+    console.log('[Dashboard User API] Incoming request for user consultations');
     // Vérifier l'authentification
     const session = await getServerSession(authOptions);
 
@@ -19,6 +20,8 @@ export async function GET(req: NextRequest) {
         { status: 401 }
       );
     }
+
+    console.log('[Dashboard User] Fetching data for:', session.user.email);
 
     // Récupérer l'utilisateur avec ses consultations et favoris
     const user = await prisma.user.findUnique({
