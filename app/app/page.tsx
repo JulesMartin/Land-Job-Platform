@@ -1,103 +1,158 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="space-y-12">
+      <section className="bg-white rounded-lg shadow-sm border border-gray-100 p-8">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="space-y-4">
+            <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">
+              Plateforme RH
+            </p>
+            <h1 className="text-4xl font-extrabold text-gray-900 leading-tight">
+              Trouvez le professionnel RH qui accompagnera votre réussite
+            </h1>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              LandJobPlatform connecte entreprises et talents RH. Réservez une consultation,
+              créez votre profil ou pilotez vos missions en toute simplicité grâce à une
+              interface claire et cohérente.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/rh"
+                className="bg-blue-600 text-white px-5 py-3 rounded-md font-semibold hover:bg-blue-700 transition-colors shadow-sm"
+              >
+                Découvrir les profils RH
+              </Link>
+              <Link
+                href="/rh/create"
+                className="text-blue-700 bg-blue-50 px-5 py-3 rounded-md font-semibold hover:bg-blue-100 transition-colors border border-blue-100"
+              >
+                Devenir RH sur la plateforme
+              </Link>
+            </div>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="bg-gray-50 rounded-lg border border-gray-200 p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">Consultations planifiées</p>
+                <p className="text-3xl font-bold text-gray-900">+120</p>
+              </div>
+              <div className="px-3 py-1 text-sm font-semibold bg-blue-50 text-blue-700 rounded-full">
+                En croissance
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 text-sm text-gray-700">
+              <div className="bg-white border border-gray-100 rounded-lg p-3 shadow-sm">
+                <p className="font-semibold text-gray-900">Experts vérifiés</p>
+                <p className="text-gray-600 mt-1">Des profils qualifiés prêts à intervenir.</p>
+              </div>
+              <div className="bg-white border border-gray-100 rounded-lg p-3 shadow-sm">
+                <p className="font-semibold text-gray-900">Processus simplifié</p>
+                <p className="text-gray-600 mt-1">Réservation et suivi centralisés.</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between text-sm text-gray-600">
+              <span>Support réactif</span>
+              <span className="text-blue-700 font-semibold">+100 entreprises accompagnées</span>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <section className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Une expérience pensée pour tous</h2>
+            <p className="text-gray-600 mt-2">
+              Naviguez avec les mêmes repères sur chaque page : couleurs, typographie et cartes
+              claires pour une lecture immédiate.
+            </p>
+          </div>
+          <Link
+            href="/dashboard"
+            className="hidden sm:inline-flex bg-gray-900 text-white px-4 py-2 rounded-md font-medium hover:bg-gray-800 transition-colors"
+          >
+            Accéder au dashboard
+          </Link>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {[{
+            title: "Parcours fluide",
+            description: "Filtres, formulaires et actions utilisent les mêmes repères visuels pour simplifier chaque étape.",
+          }, {
+            title: "Cartes lisibles",
+            description: "Informations principales mises en avant dans des encarts blancs bordés et ombrés.",
+          }, {
+            title: "Palette harmonisée",
+            description: "Fond gris clair, texte gris foncé et accents bleu profond pour rester cohérent partout.",
+          }].map((feature) => (
+            <div
+              key={feature.title}
+              className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm space-y-3"
+            >
+              <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-white rounded-lg border border-gray-100 shadow-sm p-8">
+        <div className="grid md:grid-cols-3 gap-8 items-start">
+          <div className="md:col-span-2 space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900">Commencez en quelques clics</h2>
+            <p className="text-gray-600">
+              Inscrivez-vous, renseignez vos besoins ou votre expertise puis planifiez vos échanges.
+              Le tout avec la même interface sobre et structurée que vous retrouvez sur les autres pages.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-4 text-sm text-gray-700">
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
+                <p className="font-semibold text-blue-800">1. Créez votre compte</p>
+                <p className="text-gray-700 mt-1">Sécurisé et rapide pour accéder au dashboard.</p>
+              </div>
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
+                <p className="font-semibold text-blue-800">2. Complétez votre profil</p>
+                <p className="text-gray-700 mt-1">Présentez vos besoins ou votre expertise RH.</p>
+              </div>
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 shadow-sm">
+                <p className="font-semibold text-blue-800">3. Réservez & suivez</p>
+                <p className="text-gray-700 mt-1">Planifiez vos échanges et suivez vos missions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-inner space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">Prêt à démarrer ?</h3>
+            <p className="text-gray-600">
+              Retrouvez vos actions favorites dans la navigation : inscription, consultation des
+              profils RH ou accès direct à votre espace personnel.
+            </p>
+            <div className="space-y-3">
+              <Link
+                href="/auth/join"
+                className="block text-center bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Créer un compte
+              </Link>
+              <Link
+                href="/auth/login"
+                className="block text-center text-blue-700 bg-white border border-blue-100 px-4 py-2 rounded-md font-semibold hover:bg-blue-50 transition-colors"
+              >
+                Se connecter
+              </Link>
+              <Link
+                href="/rh"
+                className="block text-center text-gray-800 bg-white border border-gray-200 px-4 py-2 rounded-md font-semibold hover:bg-gray-50 transition-colors"
+              >
+                Explorer les profils RH
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
