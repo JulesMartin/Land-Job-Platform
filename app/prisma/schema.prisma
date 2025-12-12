@@ -114,8 +114,30 @@ model RHProfile {
   user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   consultations ConsultationLog[]
   favorites     Favorite[]
+  packages      Package[]
 
   @@index([userId])
+  @@index([isActive])
+}
+
+model Package {
+  id          String    @id @default(cuid())
+  rhProfileId String
+  name        String    // Basique, Standard, Premium, etc.
+  title       String    // Titre affiché (ex: "Entretien ciblé")
+  price       String    // Prix (ex: "199.00")
+  description String    @db.Text
+  deliveryTime String   // Temps de livraison (ex: "48h")
+  features    String[]  // Liste des prestations incluses
+  order       Int       // Ordre d'affichage (1, 2, 3, 4)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  rhProfile RHProfile @relation(fields: [rhProfileId], references: [id], onDelete: Cascade)
+
+  @@index([rhProfileId])
   @@index([isActive])
 }
 

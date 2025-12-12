@@ -1,64 +1,70 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
-  const isLoading = status === 'loading';
+  const isLoading = status === "loading";
 
   return (
-    <nav className="bg-white shadow-sm border-b">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          {/* Logo / Brand */}
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900">
-              LandJobPlatform
-            </Link>
-          </div>
+    <header className="fixed top-0 left-0 right-0 bg-[#0d4d4d] px-6 py-6 z-50">
+      <div className="mx-auto max-w-[100rem]">
+        <div className="bg-[#f5f1e8] rounded-[50px] px-8 py-4 flex items-center justify-between shadow-lg">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <div className="text-[#0d4d4d]">
+              <div className="text-2xl font-bold leading-tight">
+                <span className="italic">Evoke</span>
+                <span className="ml-1 font-normal">HR</span>
+              </div>
+              <div className="text-xs uppercase tracking-wider">
+                & IMMIGRATION
+              </div>
+            </div>
+          </Link>
 
-          {/* Navigation Links */}
-          <div className="flex items-center space-x-8">
+          {/* Navigation */}
+          <nav className="hidden lg:flex items-center gap-6">
             <Link
               href="/rh"
-              className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+              className="text-[#0d4d4d] text-sm font-medium hover:text-gray-600 transition-colors"
             >
               Trouver un RH
             </Link>
 
             {isLoading ? (
-              <div className="text-gray-400">Chargement...</div>
+              <div className="text-[#0d4d4d]/60 text-sm">Chargement...</div>
             ) : session ? (
               <>
                 <Link
                   href="/rh/create"
-                  className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                  className="text-[#0d4d4d] text-sm font-medium hover:text-gray-600 transition-colors"
                 >
                   Devenir RH
                 </Link>
 
                 <Link
                   href="/dashboard"
-                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                  className="text-[#0d4d4d] text-sm font-medium hover:text-gray-600 transition-colors"
                 >
                   Dashboard
                 </Link>
 
                 <Link
                   href="/admin"
-                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                  className="text-[#0d4d4d] text-sm font-medium hover:text-gray-600 transition-colors"
                 >
                   Admin
                 </Link>
 
-                <div className="flex items-center space-x-4">
-                  <span className="text-sm text-gray-600">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-[#0d4d4d]/80">
                     {session.user?.name || session.user?.email}
                   </span>
                   <button
-                    onClick={() => signOut({ callbackUrl: '/' })}
-                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors font-medium"
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors font-medium text-sm"
                   >
                     Déconnexion
                   </button>
@@ -68,22 +74,22 @@ export default function Navbar() {
               <>
                 <Link
                   href="/auth/login"
-                  className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                  className="text-[#0d4d4d] text-sm font-medium hover:text-gray-600 transition-colors"
                 >
                   Connexion
                 </Link>
 
                 <Link
                   href="/auth/join"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium"
+                  className="bg-[#ffd700] hover:bg-[#ffed4e] text-black px-6 py-2 rounded-md font-semibold transition-colors"
                 >
                   Inscription
                 </Link>
               </>
             )}
-          </div>
+          </nav>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }

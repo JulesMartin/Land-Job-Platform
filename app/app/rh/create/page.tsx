@@ -113,15 +113,15 @@ export default function CreateRHProfilePage() {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-900">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#0d4d4d] mb-4">
             Devenir professionnel RH
           </h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="text-lg text-gray-600">
             Créez votre profil pour rejoindre notre réseau de professionnels RH
           </p>
         </div>
 
-        <div className="bg-white shadow rounded-lg p-8">
+        <div className="bg-white shadow-2xl rounded-3xl p-8 lg:p-12 border border-gray-100">
           <Formik
             initialValues={{
               bio: '',
@@ -147,7 +147,7 @@ export default function CreateRHProfilePage() {
                     id="bio"
                     name="bio"
                     rows={6}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="appearance-none block w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                     placeholder="Décrivez votre parcours, votre expertise et ce que vous proposez..."
                   />
                   <div className="mt-1 text-xs text-gray-500">
@@ -184,7 +184,7 @@ export default function CreateRHProfilePage() {
                                 );
                             setFieldValue('expertise', newExpertise);
                           }}
-                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-[#0d4d4d] focus:ring-[#c9d5c0] border-gray-300 rounded"
                         />
                         <span className="text-sm text-gray-700">
                           {option.label}
@@ -211,7 +211,7 @@ export default function CreateRHProfilePage() {
                     as="select"
                     id="priceRange"
                     name="priceRange"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                   >
                     <option value="">Sélectionnez une fourchette</option>
                     {PRICE_RANGES.map((range) => (
@@ -239,7 +239,7 @@ export default function CreateRHProfilePage() {
                     type="url"
                     id="calendlyLink"
                     name="calendlyLink"
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="appearance-none block w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                     placeholder="https://calendly.com/votre-nom"
                   />
                   <p className="mt-1 text-xs text-gray-500">
@@ -253,11 +253,11 @@ export default function CreateRHProfilePage() {
                 </div>
 
                 {/* Info message */}
-                <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
+                <div className="bg-[#c9d5c0]/30 border-2 border-[#c9d5c0] rounded-2xl p-4">
                   <div className="flex">
                     <div className="flex-shrink-0">
                       <svg
-                        className="h-5 w-5 text-blue-400"
+                        className="h-5 w-5 text-[#0d4d4d]"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -270,7 +270,7 @@ export default function CreateRHProfilePage() {
                       </svg>
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm text-blue-700">
+                      <p className="text-sm text-[#0d4d4d] font-medium">
                         Votre profil sera soumis à validation par un
                         administrateur avant d'être visible publiquement.
                       </p>
@@ -282,14 +282,14 @@ export default function CreateRHProfilePage() {
                 <div className="flex items-center justify-end space-x-4">
                   <Link
                     href="/"
-                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+                    className="px-6 py-3 text-sm font-medium text-[#0d4d4d] hover:text-gray-900 transition-colors"
                   >
                     Annuler
                   </Link>
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-[#ffd700] hover:bg-[#ffed4e] text-black px-8 py-3 rounded-xl font-semibold transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isLoading ? 'Création...' : 'Créer mon profil RH'}
                   </button>

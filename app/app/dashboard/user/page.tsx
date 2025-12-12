@@ -182,66 +182,70 @@ export default function UserDashboardPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-900">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#0d4d4d] mb-4">
             Mon Dashboard
           </h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="text-lg text-gray-600">
             Consultez votre historique et gérez vos favoris
           </p>
         </div>
 
         {/* Statistiques */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white shadow rounded-lg p-6">
+          <div className="bg-gradient-to-br from-white to-[#c9d5c0]/20 shadow-xl rounded-2xl p-8 border border-gray-100 hover:shadow-2xl transition-shadow">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg
-                  className="h-12 w-12 text-blue-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
+                <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#0d4d4d] to-[#0a3d3d] flex items-center justify-center">
+                  <svg
+                    className="h-8 w-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </div>
               </div>
-              <div className="ml-5">
-                <div className="text-3xl font-bold text-gray-900">
+              <div className="ml-6">
+                <div className="text-4xl font-bold text-[#0d4d4d]">
                   {dashboardData.stats.totalConsultations}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm font-medium text-gray-600">
                   Consultation{dashboardData.stats.totalConsultations > 1 ? 's' : ''}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white shadow rounded-lg p-6">
+          <div className="bg-gradient-to-br from-white to-[#ffd700]/20 shadow-xl rounded-2xl p-8 border border-gray-100 hover:shadow-2xl transition-shadow">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg
-                  className="h-12 w-12 text-purple-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
+                <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#ffd700] to-[#ffed4e] flex items-center justify-center">
+                  <svg
+                    className="h-8 w-8 text-[#0d4d4d]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                </div>
               </div>
-              <div className="ml-5">
-                <div className="text-3xl font-bold text-gray-900">
+              <div className="ml-6">
+                <div className="text-4xl font-bold text-[#0d4d4d]">
                   {dashboardData.stats.totalFavorites}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm font-medium text-gray-600">
                   Favori{dashboardData.stats.totalFavorites > 1 ? 's' : ''}
                 </div>
               </div>
@@ -250,7 +254,7 @@ export default function UserDashboardPage() {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white shadow rounded-lg">
+        <div className="bg-white shadow-xl rounded-2xl border border-gray-100">
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex">
               <button
@@ -258,7 +262,7 @@ export default function UserDashboardPage() {
                   const consultationsSection = document.getElementById('consultations');
                   consultationsSection?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="border-b-2 border-blue-500 text-blue-600 py-4 px-6 text-sm font-medium"
+                className="border-b-3 border-[#0d4d4d] text-[#0d4d4d] py-4 px-6 font-semibold"
               >
                 Historique des consultations
               </button>
@@ -267,7 +271,7 @@ export default function UserDashboardPage() {
                   const favoritesSection = document.getElementById('favorites');
                   favoritesSection?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-6 text-sm font-medium"
+                className="border-b-3 border-transparent text-gray-500 hover:text-[#0d4d4d] hover:border-[#c9d5c0] py-4 px-6 font-medium transition-colors"
               >
                 Mes favoris
               </button>
@@ -275,8 +279,8 @@ export default function UserDashboardPage() {
           </div>
 
           {/* Consultations Section */}
-          <div id="consultations" className="p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <div id="consultations" className="p-6 lg:p-8">
+            <h2 className="text-2xl font-bold text-[#0d4d4d] mb-6">
               Historique des consultations
             </h2>
             {dashboardData.consultations.length === 0 ? (
@@ -303,7 +307,7 @@ export default function UserDashboardPage() {
                 <div className="mt-6">
                   <Link
                     href="/rh"
-                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                    className="inline-flex items-center px-6 py-3 shadow-lg font-semibold rounded-xl text-black bg-[#ffd700] hover:bg-[#ffed4e] transition-all hover:shadow-xl"
                   >
                     Parcourir les profils RH
                   </Link>
@@ -314,7 +318,7 @@ export default function UserDashboardPage() {
                 {dashboardData.consultations.map((consultation) => (
                   <div
                     key={consultation.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors"
+                    className="border-2 border-gray-200 rounded-2xl p-6 hover:border-[#c9d5c0] hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-4 flex-1">
@@ -366,7 +370,7 @@ export default function UserDashboardPage() {
                       </div>
                       <Link
                         href={`/rh/${consultation.rhProfile.id}`}
-                        className="ml-4 inline-flex items-center px-3 py-1.5 border border-blue-600 text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
+                        className="ml-4 inline-flex items-center px-4 py-2 border-2 border-[#0d4d4d] font-semibold rounded-xl text-[#0d4d4d] bg-white hover:bg-[#c9d5c0]/30 transition-all"
                       >
                         Voir le profil
                       </Link>
@@ -378,8 +382,8 @@ export default function UserDashboardPage() {
           </div>
 
           {/* Favorites Section */}
-          <div id="favorites" className="p-6 border-t border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Mes favoris</h2>
+          <div id="favorites" className="p-6 lg:p-8 border-t border-gray-200">
+            <h2 className="text-2xl font-bold text-[#0d4d4d] mb-6">Mes favoris</h2>
             {dashboardData.favorites.length === 0 ? (
               <div className="text-center py-12">
                 <svg
@@ -407,7 +411,7 @@ export default function UserDashboardPage() {
                 {dashboardData.favorites.map((favorite) => (
                   <div
                     key={favorite.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors"
+                    className="border-2 border-gray-200 rounded-2xl p-6 hover:border-[#c9d5c0] hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-start space-x-3 flex-1">
@@ -481,7 +485,7 @@ export default function UserDashboardPage() {
                     </div>
                     <Link
                       href={`/rh/${favorite.rhProfile.id}`}
-                      className="block w-full text-center px-3 py-2 border border-blue-600 text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
+                      className="block w-full text-center px-4 py-3 border-2 border-[#0d4d4d] font-semibold rounded-xl text-[#0d4d4d] bg-white hover:bg-[#c9d5c0]/30 transition-all"
                     >
                       Voir le profil
                     </Link>

@@ -111,12 +111,12 @@ export default function RHListingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-extrabold text-gray-900">
+      <div className="bg-gradient-to-r from-[#0d4d4d] to-[#0a3d3d] shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
             Trouver un professionnel RH
           </h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="text-lg text-white/90">
             Parcourez notre réseau de professionnels RH et réservez une consultation
           </p>
         </div>
@@ -126,15 +126,15 @@ export default function RHListingPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar avec filtres */}
           <aside className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-gray-900">Filtres</h2>
+            <div className="bg-white rounded-2xl shadow-xl p-6 sticky top-24 border border-gray-100">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-[#0d4d4d]">Filtres</h2>
                 {(selectedExpertise.length > 0 ||
                   selectedPriceRange ||
                   searchTerm) && (
                   <button
                     onClick={handleResetFilters}
-                    className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                    className="text-sm text-[#0d4d4d] hover:text-[#ffd700] font-semibold transition-colors"
                   >
                     Réinitialiser
                   </button>
@@ -155,7 +155,7 @@ export default function RHListingPage() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Nom du professionnel..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                 />
               </div>
 
@@ -174,7 +174,7 @@ export default function RHListingPage() {
                         type="checkbox"
                         checked={selectedExpertise.includes(option.value)}
                         onChange={() => handleExpertiseToggle(option.value)}
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-[#0d4d4d] focus:ring-[#c9d5c0] border-gray-300 rounded"
                       />
                       <span className="text-sm text-gray-700">
                         {option.label}
@@ -192,7 +192,7 @@ export default function RHListingPage() {
                 <select
                   value={selectedPriceRange}
                   onChange={(e) => setSelectedPriceRange(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                 >
                   <option value="">Tous les tarifs</option>
                   {PRICE_RANGES.map((range) => (
@@ -228,16 +228,16 @@ export default function RHListingPage() {
             {isLoading ? (
               <div className="flex items-center justify-center py-12">
                 <div className="text-center">
-                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#0d4d4d]"></div>
                   <p className="mt-4 text-gray-600">
                     Chargement des profils...
                   </p>
                 </div>
               </div>
             ) : profiles.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-md p-12 text-center">
+              <div className="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-100">
                 <svg
-                  className="mx-auto h-12 w-12 text-gray-400"
+                  className="mx-auto h-16 w-16 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -249,10 +249,10 @@ export default function RHListingPage() {
                     d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <h3 className="mt-4 text-lg font-medium text-gray-900">
+                <h3 className="mt-4 text-xl font-bold text-[#0d4d4d]">
                   Aucun professionnel trouvé
                 </h3>
-                <p className="mt-2 text-sm text-gray-600">
+                <p className="mt-2 text-gray-600">
                   Essayez de modifier vos critères de recherche
                 </p>
                 {(selectedExpertise.length > 0 ||
@@ -260,7 +260,7 @@ export default function RHListingPage() {
                   searchTerm) && (
                   <button
                     onClick={handleResetFilters}
-                    className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium"
+                    className="mt-6 bg-[#ffd700] hover:bg-[#ffed4e] text-black px-6 py-3 rounded-xl font-semibold transition-all hover:shadow-lg"
                   >
                     Réinitialiser les filtres
                   </button>

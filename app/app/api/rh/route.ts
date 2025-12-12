@@ -102,18 +102,25 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { userId, bio, expertise, priceRange, calendlyLink } = body;
 
+    console.log('📨 Données reçues:', { userId, bio, expertise, priceRange, calendlyLink });
+
     // Validation des champs requis
     if (!userId) {
+      console.log('❌ userId manquant');
       return NextResponse.json(
         { error: 'userId requis' },
         { status: 400 }
       );
     }
 
+    console.log('🔍 Recherche utilisateur avec ID:', userId);
+
     // Vérifier si l'utilisateur existe
     const user = await prisma.user.findUnique({
       where: { id: userId }
     });
+
+    console.log('👤 Utilisateur trouvé:', user ? 'OUI' : 'NON', user?.email);
 
     if (!user) {
       return NextResponse.json(

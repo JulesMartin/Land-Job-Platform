@@ -44,6 +44,7 @@ const PRICE_LABELS: Record<string, string> = {
   '200+': '200€+/h',
 };
 
+
 export default function RHProfilePage() {
   const params = useParams();
   const router = useRouter();
@@ -53,6 +54,8 @@ export default function RHProfilePage() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteLoading, setFavoriteLoading] = useState(false);
   const [calendlyLoaded, setCalendlyLoaded] = useState(false);
+  const [packages, setPackages] = useState<any[]>([]);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   const rhId = params?.id as string;
 
@@ -102,6 +105,29 @@ export default function RHProfilePage() {
 
     checkFavorite();
   }, [session, rhId]);
+
+  // Charger les packages du profil RH
+  useEffect(() => {
+    if (!rhId) return;
+
+    const fetchPackages = async () => {
+      try {
+        const response = await fetch(`/api/packages?rhProfileId=${rhId}`);
+        const data = await response.json();
+        if (response.ok && data.data) {
+          setPackages(data.data);
+          // Par défaut, sélectionner le dernier package (le plus cher généralement)
+          if (data.data.length > 0) {
+            setActiveTabIndex(data.data.length - 1);
+          }
+        }
+      } catch (error) {
+        console.error('Erreur chargement packages:', error);
+      }
+    };
+
+    fetchPackages();
+  }, [rhId]);
 
   // Initialiser Calendly quand le script est chargé
   useEffect(() => {
@@ -209,7 +235,7 @@ export default function RHProfilePage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#0d4d4d]"></div>
           <p className="mt-4 text-gray-600">Chargement du profil...</p>
         </div>
       </div>
@@ -235,11 +261,11 @@ export default function RHProfilePage() {
 
       <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="bg-gradient-to-r from-[#0d4d4d] to-[#0a3d3d] shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Link
             href="/rh"
-            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 mb-4"
+            className="inline-flex items-center text-sm text-white/90 hover:text-white mb-4 transition-colors"
           >
             <svg
               className="w-4 h-4 mr-2"
@@ -259,12 +285,12 @@ export default function RHProfilePage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Colonne gauche - Info profil */}
           <div className="lg:col-span-2 space-y-6">
             {/* Carte profil */}
-            <div className="bg-white rounded-lg shadow-md p-8">
+            <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
               {/* Header avec photo et nom */}
               <div className="flex items-start space-x-6 mb-6">
                 <div className="flex-shrink-0">
@@ -275,7 +301,7 @@ export default function RHProfilePage() {
                       className="w-24 h-24 rounded-full object-cover border-4 border-gray-200"
                     />
                   ) : (
-                    <div className="w-24 h-24 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-3xl border-4 border-gray-200">
+                    <div className="w-24 h-24 rounded-full bg-[#0d4d4d] flex items-center justify-center text-white font-bold text-3xl border-4 border-gray-200">
                       {profile.user.name?.charAt(0).toUpperCase() ||
                         profile.user.email.charAt(0).toUpperCase()}
                     </div>
@@ -285,11 +311,11 @@ export default function RHProfilePage() {
                 <div className="flex-1">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h1 className="text-3xl font-bold text-gray-900">
+                      <h1 className="text-3xl font-bold text-[#0d4d4d]">
                         {profile.user.name || 'Professionnel RH'}
                       </h1>
                       {profile.priceRange && (
-                        <p className="mt-1 text-lg font-medium text-blue-600">
+                        <p className="mt-1 text-lg font-semibold text-[#ffd700]">
                           {PRICE_LABELS[profile.priceRange] || profile.priceRange}
                         </p>
                       )}
@@ -369,14 +395,14 @@ export default function RHProfilePage() {
               {/* Expertises */}
               {profile.expertise && profile.expertise.length > 0 && (
                 <div className="mb-6">
-                  <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">
+                  <h2 className="text-sm font-semibold text-[#0d4d4d] uppercase tracking-wide mb-3">
                     Domaines d'expertise
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {profile.expertise.map((exp) => (
                       <span
                         key={exp}
-                        className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                        className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-[#c9d5c0] text-[#0d4d4d]"
                       >
                         {EXPERTISE_LABELS[exp] || exp}
                       </span>
@@ -387,7 +413,7 @@ export default function RHProfilePage() {
 
               {/* Bio */}
               <div>
-                <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">
+                <h2 className="text-sm font-semibold text-[#0d4d4d] uppercase tracking-wide mb-3">
                   À propos
                 </h2>
                 <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
@@ -395,12 +421,144 @@ export default function RHProfilePage() {
                 </p>
               </div>
             </div>
+
+            {/* Section Packages */}
+            {packages.length > 0 && (
+              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                {/* Tabs Header */}
+                <div className="flex border-b border-gray-200">
+                  {packages.map((pkg, index) => (
+                    <button
+                      key={pkg.id}
+                      onClick={() => setActiveTabIndex(index)}
+                      className={`flex-1 px-6 py-4 text-center font-medium transition-colors capitalize ${
+                        activeTabIndex === index
+                          ? 'text-[#0d4d4d] border-b-2 border-[#0d4d4d] bg-gray-50'
+                          : 'text-gray-600 hover:text-[#0d4d4d] hover:bg-gray-50'
+                      }`}
+                    >
+                      {pkg.name}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Package Content */}
+                {packages[activeTabIndex] && (
+                  <div className="p-8">
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-bold text-[#0d4d4d] mb-2">
+                        {packages[activeTabIndex].title}
+                      </h3>
+                      <div className="flex items-baseline gap-2 mb-4">
+                        <span className="text-4xl font-bold text-[#0d4d4d]">
+                          {packages[activeTabIndex].price} €
+                        </span>
+                        <button className="text-gray-400 hover:text-gray-600">
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                      <p className="text-gray-700 mb-4">
+                        {packages[activeTabIndex].description}
+                      </p>
+                    </div>
+
+                    {/* Delivery Time */}
+                    <div className="flex items-center gap-2 mb-6 text-sm text-gray-700">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>Livraison en {packages[activeTabIndex].deliveryTime}</span>
+                    </div>
+
+                    {/* Features List */}
+                    <div className="space-y-3 mb-8">
+                      {packages[activeTabIndex].features.map((feature: string, index: number) => (
+                        <div key={index} className="flex items-start gap-3">
+                          <svg
+                            className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-gray-700">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="space-y-3">
+                      <button className="w-full bg-[#0d4d4d] hover:bg-[#0a3d3d] text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        Continuer
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+                      <button className="w-full border-2 border-gray-300 hover:border-[#0d4d4d] text-[#0d4d4d] font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        Contactez-moi
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Colonne droite - Calendly */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <div className="bg-white rounded-2xl shadow-xl p-6 sticky top-4 border border-gray-100">
+              <h2 className="text-xl font-bold text-[#0d4d4d] mb-4">
                 Réserver une consultation
               </h2>
 
@@ -413,13 +571,13 @@ export default function RHProfilePage() {
                   {/* Embed Calendly */}
                   <div
                     id="calendly-embed"
-                    className="rounded-md overflow-hidden"
+                    className="rounded-xl overflow-hidden"
                     style={{ minHeight: '630px' }}
                   >
                     {!calendlyLoaded && (
                       <div className="flex items-center justify-center h-full p-8">
                         <div className="text-center">
-                          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-600"></div>
+                          <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#0d4d4d]"></div>
                           <p className="mt-2 text-sm text-gray-600">Chargement...</p>
                         </div>
                       </div>

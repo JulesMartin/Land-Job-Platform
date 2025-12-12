@@ -7,6 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import PackageManager from '@/components/PackageManager';
 
 const RHProfileSchema = Yup.object().shape({
   bio: Yup.string()
@@ -197,10 +198,10 @@ export default function RHDashboardPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-900">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#0d4d4d] mb-4">
             Dashboard RH
           </h1>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="text-lg text-gray-600">
             Gérez votre profil et consultez vos statistiques
           </p>
         </div>
@@ -208,10 +209,10 @@ export default function RHDashboardPage() {
         {/* Status Badge */}
         <div className="mb-6">
           <span
-            className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+            className={`inline-flex items-center px-5 py-3 rounded-2xl font-semibold shadow-lg ${
               dashboardData.profile.isActive
-                ? 'bg-green-100 text-green-800'
-                : 'bg-yellow-100 text-yellow-800'
+                ? 'bg-gradient-to-r from-[#c9d5c0] to-[#d4e8d4] text-[#0d4d4d] border-2 border-[#c9d5c0]'
+                : 'bg-gradient-to-r from-[#ffd700] to-[#ffed4e] text-[#0d4d4d] border-2 border-[#ffd700]'
             }`}
           >
             {dashboardData.profile.isActive
@@ -222,29 +223,29 @@ export default function RHDashboardPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Statistiques */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">
+          <div className="bg-gradient-to-br from-white to-[#c9d5c0]/20 shadow-xl rounded-2xl p-8 border border-gray-100">
+            <h3 className="text-xl font-bold text-[#0d4d4d] mb-6">
               Statistiques
             </h3>
-            <div className="space-y-4">
-              <div>
-                <div className="text-3xl font-bold text-blue-600">
+            <div className="space-y-6">
+              <div className="bg-white/60 rounded-xl p-4 border border-[#c9d5c0]/30">
+                <div className="text-4xl font-bold text-[#0d4d4d]">
                   {dashboardData.stats.totalConsultations}
                 </div>
-                <div className="text-sm text-gray-600">Consultations totales</div>
+                <div className="text-sm font-medium text-gray-600">Consultations totales</div>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-purple-600">
+              <div className="bg-white/60 rounded-xl p-4 border border-[#ffd700]/30">
+                <div className="text-4xl font-bold text-[#0d4d4d]">
                   {dashboardData.stats.totalFavorites}
                 </div>
-                <div className="text-sm text-gray-600">Ajouté en favoris</div>
+                <div className="text-sm font-medium text-gray-600">Ajouté en favoris</div>
               </div>
             </div>
           </div>
 
           {/* Consultations récentes */}
-          <div className="bg-white shadow rounded-lg p-6 lg:col-span-2">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">
+          <div className="bg-white shadow-xl rounded-2xl p-8 lg:col-span-2 border border-gray-100">
+            <h3 className="text-xl font-bold text-[#0d4d4d] mb-6">
               Consultations récentes
             </h3>
             {dashboardData.recentConsultations.length === 0 ? (
@@ -256,7 +257,7 @@ export default function RHDashboardPage() {
                 {dashboardData.recentConsultations.map((consultation) => (
                   <div
                     key={consultation.id}
-                    className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg"
+                    className="flex items-center space-x-3 p-4 bg-gradient-to-r from-gray-50 to-[#c9d5c0]/10 rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
                   >
                     <div className="flex-shrink-0">
                       {consultation.user.image ? (
@@ -294,8 +295,8 @@ export default function RHDashboardPage() {
         </div>
 
         {/* Formulaire d'édition */}
-        <div className="bg-white shadow rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <div className="bg-white shadow-xl rounded-2xl p-8 lg:p-12 border border-gray-100">
+          <h2 className="text-3xl font-bold text-[#0d4d4d] mb-8">
             Modifier mon profil
           </h2>
 
@@ -325,7 +326,7 @@ export default function RHDashboardPage() {
                     id="bio"
                     name="bio"
                     rows={6}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="appearance-none block w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                     placeholder="Décrivez votre parcours, votre expertise et ce que vous proposez..."
                   />
                   <div className="mt-1 text-xs text-gray-500">
@@ -362,7 +363,7 @@ export default function RHDashboardPage() {
                                 );
                             setFieldValue('expertise', newExpertise);
                           }}
-                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-[#0d4d4d] focus:ring-[#c9d5c0] border-gray-300 rounded"
                         />
                         <span className="text-sm text-gray-700">
                           {option.label}
@@ -389,7 +390,7 @@ export default function RHDashboardPage() {
                     as="select"
                     id="priceRange"
                     name="priceRange"
-                    className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                   >
                     <option value="">Sélectionnez une fourchette</option>
                     {PRICE_RANGES.map((range) => (
@@ -417,7 +418,7 @@ export default function RHDashboardPage() {
                     type="url"
                     id="calendlyLink"
                     name="calendlyLink"
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="appearance-none block w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#c9d5c0] focus:border-[#0d4d4d] transition-all"
                     placeholder="https://calendly.com/votre-nom"
                   />
                   <p className="mt-1 text-xs text-gray-500">
@@ -431,17 +432,17 @@ export default function RHDashboardPage() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex items-center justify-end space-x-4 pt-4 border-t">
+                <div className="flex items-center justify-end space-x-4 pt-6 border-t-2 border-gray-100">
                   <Link
                     href={`/rh/${dashboardData.profile.id}`}
-                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+                    className="px-6 py-3 font-medium text-[#0d4d4d] hover:text-gray-900 transition-colors"
                   >
                     Voir mon profil public
                   </Link>
                   <button
                     type="submit"
                     disabled={isSaving}
-                    className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-[#ffd700] hover:bg-[#ffed4e] text-black px-8 py-3 rounded-xl font-semibold transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSaving ? 'Enregistrement...' : 'Enregistrer les modifications'}
                   </button>
@@ -449,6 +450,11 @@ export default function RHDashboardPage() {
               </Form>
             )}
           </Formik>
+        </div>
+
+        {/* Gestion des Packages */}
+        <div className="bg-white shadow-xl rounded-2xl p-8 lg:p-12 border border-gray-100 mt-8">
+          <PackageManager rhProfileId={dashboardData.profile.id} />
         </div>
       </div>
     </div>
