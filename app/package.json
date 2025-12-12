@@ -16,6 +16,7 @@
     "dotenv": "^17.2.3",
     "formik": "2.4.6",
     "micromatch": "4.0.8",
+    "motion-dom": "^12.23.23",
     "next": "15.3.6",
     "next-auth": "4.24.11",
     "prisma": "6.9.0",
