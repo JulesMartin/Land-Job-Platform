@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/nextAuth';
 import prisma from '@/lib/prisma';
 
 // PUT /api/packages/[id] - Mettre à jour un package

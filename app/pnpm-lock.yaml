@@ -25,7 +25,7 @@ importers:
         version: 17.2.3
       formik:
         specifier: 2.4.6
-        version: 2.4.6(@types/react@19.2.7)(react@18.3.1)
+        version: 2.4.6(@types/react@18.3.27)(react@18.3.1)
       framer-motion:
         specifier: ^12.23.26
         version: 12.23.26(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -79,11 +79,11 @@ importers:
         specifier: ^7.0.4
         version: 7.0.4
       '@types/react':
-        specifier: ^19
-        version: 19.2.7
+        specifier: ^18
+        version: 18.3.27
       '@types/react-dom':
-        specifier: ^19
-        version: 19.2.3(@types/react@19.2.7)
+        specifier: ^18
+        version: 18.3.7(@types/react@18.3.27)
       '@types/react-google-recaptcha':
         specifier: ^2.1.9
         version: 2.1.9
@@ -766,16 +766,19 @@ packages:
   '@types/nodemailer@7.0.4':
     resolution: {integrity: sha512-ee8fxWqOchH+Hv6MDDNNy028kwvVnLplrStm4Zf/3uHWw5zzo8FoYYeffpJtGs2wWysEumMH0ZIdMGMY1eMAow==}
 
-  '@types/react-dom@19.2.3':
-    resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
+  '@types/prop-types@15.7.15':
+    resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
+
+  '@types/react-dom@18.3.7':
+    resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==}
     peerDependencies:
-      '@types/react': ^19.2.0
+      '@types/react': ^18.0.0
 
   '@types/react-google-recaptcha@2.1.9':
     resolution: {integrity: sha512-nT31LrBDuoSZJN4QuwtQSF3O89FVHC4jLhM+NtKEmVF5R1e8OY0Jo4//x2Yapn2aNHguwgX5doAq8Zo+Ehd0ug==}
 
-  '@types/react@19.2.7':
-    resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
+  '@types/react@18.3.27':
+    resolution: {integrity: sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w==}
 
   bcryptjs@3.0.2:
     resolution: {integrity: sha512-k38b3XOZKv60C4E2hVsXTolJWfkGRMbILBIe2IBITXciy5bOsTKot5kDrf3ZfufQtQOUN5mXceUEpU1rTl9Uog==}
@@ -2144,9 +2147,9 @@ snapshots:
 
   '@types/braces@3.0.5': {}
 
-  '@types/hoist-non-react-statics@3.3.7(@types/react@19.2.7)':
+  '@types/hoist-non-react-statics@3.3.7(@types/react@18.3.27)':
     dependencies:
-      '@types/react': 19.2.7
+      '@types/react': 18.3.27
       hoist-non-react-statics: 3.3.2
 
   '@types/micromatch@4.0.10':
@@ -2164,16 +2167,19 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@types/react-dom@19.2.3(@types/react@19.2.7)':
+  '@types/prop-types@15.7.15': {}
+
+  '@types/react-dom@18.3.7(@types/react@18.3.27)':
     dependencies:
-      '@types/react': 19.2.7
+      '@types/react': 18.3.27
 
   '@types/react-google-recaptcha@2.1.9':
     dependencies:
-      '@types/react': 19.2.7
+      '@types/react': 18.3.27
 
-  '@types/react@19.2.7':
+  '@types/react@18.3.27':
     dependencies:
+      '@types/prop-types': 15.7.15
       csstype: 3.2.3
 
   bcryptjs@3.0.2: {}
@@ -2223,9 +2229,9 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
-  formik@2.4.6(@types/react@19.2.7)(react@18.3.1):
+  formik@2.4.6(@types/react@18.3.27)(react@18.3.1):
     dependencies:
-      '@types/hoist-non-react-statics': 3.3.7(@types/react@19.2.7)
+      '@types/hoist-non-react-statics': 3.3.7(@types/react@18.3.27)
       deepmerge: 2.2.1
       hoist-non-react-statics: 3.3.2
       lodash: 4.17.21

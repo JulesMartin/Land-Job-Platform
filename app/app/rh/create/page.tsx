@@ -125,7 +125,7 @@ export default function CreateRHProfilePage() {
           <Formik
             initialValues={{
               bio: '',
-              expertise: [],
+              expertise: [] as string[],
               priceRange: '',
               calendlyLink: '',
             }}
